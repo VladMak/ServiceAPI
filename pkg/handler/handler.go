@@ -1,24 +1,41 @@
 package handler
 
-//go get -u github.com/gin-gonic/gin
 import (
 	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
-
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	auth := router.Group(relativePath: "/auth")
+	auth := router.Group("/auth")
 	{
-		auth.POST(relativePath: "/sign-up")
-		auth.POST(relativePath: "/sign-in")
+		auth.POST("/sign-up", h.signUp)
+		auth.POST("/sign-in", h.signIn)
 	}
 
-	/*api := router.Group(relativePath: "/api"){
+	api := router.Group("/api")
+	{
+		lists := api.Group("/lists")
+		{
+			lists.POST("/", h.createList)
+			lists.GET("/", h.getAllLists)
+			lists.GET("/:id", h.getListById)
+			lists.PUT("/:id", h.updateList)
+			lists.DELETE("/:id", h.deleteList)
 
-	}*/
+			items := api.Group("/lists")
+			{
+				items.POST("/", h.createItem)
+				items.GET("/", h.getAllItems)
+				items.GET("/:id", h.getItemById)
+				items.PUT("/:id", h.updateItem)
+				items.DELETE("/:id", h.deleteItem)
+			}
+		}
+	}
+
+	return router
 }

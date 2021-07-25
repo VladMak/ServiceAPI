@@ -2,11 +2,14 @@ package main
 
 import (
 	"github.com/VladMak/ServiceAPI"
+	"github.com/VladMak/ServiceAPI/pkg/handler"
+	"log"
 )
 
 func main() {
+	handlers := new(handler.Handler)
 	srv := new(todo.Server)
-	if err := srv.Run("8080"); err != nil {
-		log.Fatalf(format: "error occured while running http server: %s", err.Error())
+	if err := srv.Run("8080", handlers.InitRoutes()); err != nil {
+		log.Fatalf("error occured while running http server: %s", err.Error())
 	}
 }
