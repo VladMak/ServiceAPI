@@ -2,9 +2,19 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/VladMak/ServiceAPI/pkg/service"
 )
 
+/*
+Структура обработчиков
+Тут происходит инициализация роутов, по которым будет работать HTTP сервер. Создаем API для фронтэнд приложения. Подойдет как для сайта, так и для мобильного приложения сразу же.
+*/
 type Handler struct {
+	services *service.Service
+}
+
+func NewHandler(services *service.Service) *Handler {
+	return &Handler{services: services}
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
