@@ -1,0 +1,9 @@
+port: "8080"
+
+db:
+    username: "mavl"
+    password: "Pa$$w0rd"
+    host: "localhost"
+    port: "5432"
+    dbname: "freelance_realto"
+    sslmode: "disable"
