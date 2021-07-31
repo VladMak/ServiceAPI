@@ -1,20 +1,19 @@
 package service
 
 import (
-	"github.com/VladMak/ServiceAPI/pkg/repository"
 	"github.com/VladMak/ServiceAPI"
+	"github.com/VladMak/ServiceAPI/pkg/repository"
 )
 
 type Authorization interface {
 	CreateUser(user ServiceAPI.User) (int, error)
+	GenerateToken(username, password string) (string, error)
 }
 
 type TodoList interface {
-
 }
 
 type TodoItem interface {
-
 }
 
 type Service struct {
