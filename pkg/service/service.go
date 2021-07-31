@@ -1,9 +1,12 @@
 package service
 
-import "github.com/VladMak/ServiceAPI/pkg/repository"
+import (
+	"github.com/VladMak/ServiceAPI/pkg/repository"
+	"github.com/VladMak/ServiceAPI"
+)
 
 type Authorization interface {
-
+	CreateUser(user ServiceAPI.User) (int, error)
 }
 
 type TodoList interface {
@@ -21,5 +24,7 @@ type Service struct {
 }
 
 func NewService(repos *repository.Repository) *Service {
-	return &Service{}
+	return &Service{
+		Authorization: NewAuthService(repos.Authorization),
+	}
 }
