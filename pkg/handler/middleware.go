@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
-	"fmt"
 )
 
 const (
@@ -13,7 +12,6 @@ const (
 )
 
 func (h *Handler) userIdentity(c *gin.Context) {
-	fmt.Println("hello user userIdentity")
 	header := c.GetHeader(authorizationHeader)
 	if header == "" {
 		newErrorResponse(c, http.StatusUnauthorized, "empty auth header")
