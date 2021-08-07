@@ -1,9 +1,9 @@
 port: "8080"
 
 db:
-    username: "mavl"
-    password: "Pa$$w0rd"
-    host: "localhost"
+    username: "ejqibkanuhfyxt"
+    password: "7727fdbf449740861794d5d2a6f3ae3c2f075ef1fb0b8573488df764a039d747"
+    host: "ec2-34-233-192-238.compute-1.amazonaws.com"
     port: "5432"
-    dbname: "freelance_realto"
-    sslmode: "disable"
+    dbname: "d8iah9iik5htqe"
+    sslmode: "require"

@@ -7,3 +7,4 @@ db:
     port: "5432"
     dbname: "d8iah9iik5htqe"
     sslmode: "require"
+

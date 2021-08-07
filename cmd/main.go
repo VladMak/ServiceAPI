@@ -12,6 +12,14 @@ import (
 	"os"
 )
 
+const (
+	DEVELOPMENT bool = false
+)
+
+var (
+	port string
+)
+
 /* Точка входа в программу
 Определяем основные обработчики, абстракцию сервера HTTP, и запускаем все это дело на определенном порту. Подключаем обработку ошибок. Дальнейшая работа переходит в сервер HTTP, при этом туда передаются обработчики и инициализируются сразу же.
 */
@@ -38,14 +46,24 @@ func main() {
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 
+	// viper.GetString("port")
+	// os.Getenv("PORT")
 	srv := new(ServiceAPI.Server)
-	if err := srv.Run(os.Getenv("PORT"), handlers.InitRoutes()); err != nil {
+	if err := srv.Run(port, handlers.InitRoutes()); err != nil {
 		logrus.Fatalf("error occured while running http server: %s", err.Error())
 	}
 }
 
 func initConfig() error {
-	viper.AddConfigPath("configs")
-	viper.SetConfigName("config_test")
+	if DEVELOPMENT {
+		port = viper.GetString("port")
+		viper.AddConfigPath("configs")
+		viper.SetConfigName("config")
+	} else {
+		port = os.Getenv("PORT")
+		viper.AddConfigPath("configs")
+		//viper.AddConfigPath("prod_configs")
+		viper.SetConfigName("config")
+	}
 	return viper.ReadInConfig()
 }

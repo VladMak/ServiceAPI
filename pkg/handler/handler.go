@@ -21,7 +21,7 @@ func NewHandler(services *service.Service) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	chat := chat.Chat()
+	chatS := chat.Chat{}
 
 	auth := router.Group("/auth")
 	{
@@ -49,11 +49,12 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			}
 		}
 
-		chat := api.Group("/chat")
+		// Организация чата
+		chatAPI := api.Group("/chat")
 		{
-			chat.POST("/", chat.Test)
-			chat.GET("/getMessage")
-			chat.PUT("/sendMessage")
+			chatAPI.POST("/", chatS.Test)
+			chatAPI.GET("/getMessage")
+			chatAPI.PUT("/sendMessage")
 		}
 	}
 
