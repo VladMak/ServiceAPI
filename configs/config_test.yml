@@ -6,4 +6,4 @@ db:
     host: "ec2-34-233-192-238.compute-1.amazonaws.com"
     port: "5432"
     dbname: "d8iah9iik5htqe"
-    sslmode: "disable"
+    sslmode: "require"
