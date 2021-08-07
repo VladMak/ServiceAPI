@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/viper"
 	_"log"
 	"github.com/sirupsen/logrus"
+	"os"
 )
 
 /* Точка входа в программу
@@ -38,7 +39,7 @@ func main() {
 	handlers := handler.NewHandler(services)
 
 	srv := new(ServiceAPI.Server)
-	if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
+	if err := srv.Run(os.Getenv("PORT"), handlers.InitRoutes()); err != nil {
 		logrus.Fatalf("error occured while running http server: %s", err.Error())
 	}
 }
