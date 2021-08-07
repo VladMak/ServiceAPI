@@ -3,6 +3,7 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/VladMak/ServiceAPI/pkg/service"
+	"github.com/VladMak/ServiceAPI/internal/chat"
 )
 
 /*
@@ -19,6 +20,8 @@ func NewHandler(services *service.Service) *Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
+
+	chat := chat.Chat()
 
 	auth := router.Group("/auth")
 	{
@@ -44,6 +47,13 @@ func (h *Handler) InitRoutes() *gin.Engine {
 				items.PUT("/:id", h.updateItem)
 				items.DELETE("/:id", h.deleteItem)
 			}
+		}
+
+		chat := api.Group("/chat")
+		{
+			chat.POST("/", chat.Test)
+			chat.GET("/getMessage")
+			chat.PUT("/sendMessage")
 		}
 	}
 
