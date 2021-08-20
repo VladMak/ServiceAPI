@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"github.com/VladMak/ServiceAPI"
+	"log"
 )
 
 type ChatServer struct {
@@ -44,9 +45,9 @@ func (ch *ChatServer) SendMessage(c *gin.Context) {
 		return
 	}
 
-	
+
 
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"idUs"
+		"idUs": "sd",
 	})
 }
