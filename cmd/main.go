@@ -10,10 +10,11 @@ import (
 	_"log"
 	"github.com/sirupsen/logrus"
 	"os"
+	_"fmt"
 )
 
 const (
-	DEVELOPMENT bool = false
+	DEVELOPMENT bool = true
 )
 
 var (
@@ -48,6 +49,10 @@ func main() {
 
 	// viper.GetString("port")
 	// os.Getenv("PORT")
+	if port = os.Getenv("PORT"); port == "" {
+		port = viper.GetString("port")
+	}
+
 	srv := new(ServiceAPI.Server)
 	if err := srv.Run(port, handlers.InitRoutes()); err != nil {
 		logrus.Fatalf("error occured while running http server: %s", err.Error())
@@ -56,14 +61,11 @@ func main() {
 
 func initConfig() error {
 	if DEVELOPMENT {
-		port = viper.GetString("port")
 		viper.AddConfigPath("configs")
-		viper.SetConfigName("config")
 	} else {
-		port = os.Getenv("PORT")
 		viper.AddConfigPath("configs")
 		//viper.AddConfigPath("prod_configs")
-		viper.SetConfigName("config")
 	}
+	viper.SetConfigName("config")
 	return viper.ReadInConfig()
 }

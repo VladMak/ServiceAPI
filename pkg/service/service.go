@@ -12,6 +12,7 @@ type Authorization interface {
 }
 
 type TodoList interface {
+	Create(userId int, list ServiceAPI.TodoList) (int, error)
 }
 
 type TodoItem interface {

@@ -11,6 +11,8 @@ const (
 	usersListsTable = "users_lists"
 	todoItemsTable = "todo_items"
 	listsItemsTable = "lists_items"
+
+	messagesTable = "messages"
 )
 
 type Config struct {
